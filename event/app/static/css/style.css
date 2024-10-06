@@ -1,0 +1,11 @@
+.navbar .nav-link {
+    color: black !important; /* Force text color to white */
+}
+
+.navbar-brand {
+    color: black !important; /* Force brand color to white */
+}
+
+h1{
+    color:rgb(51, 130, 11);
+}

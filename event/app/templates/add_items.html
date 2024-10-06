@@ -1,0 +1,40 @@
+{% extends "vendor_home.html" %}
+{% load static %}
+{% block title %}Add Items{% endblock title %} 
+
+{% block main_content %}
+
+    <div class="card"> 
+        <div class="card-header">
+            Add Items
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Add Items</h5>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <ul class="bullets" style="list-style-type: none; padding-left: 0; margin: 0;">
+                        <li>{{ field.label_tag }}</li>
+                        <li>{{ field }}</li>
+                    </ul>
+                </div>
+                {% endfor %}
+                <br>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+
+            {% if messages %}
+                <div class="message-container">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock main_content %}

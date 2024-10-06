@@ -1,0 +1,37 @@
+{% extends "user_home.html" %}
+{% load static %}
+{% block title %}Product List{% endblock title %} 
+
+{% block main_content %}
+<h1>Products Added by {{ vendor.username }}</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        {% if products %}
+            {% for product in products %}
+                <div class="col-md-4 mb-4"> <!-- Each card takes up 4 columns for a total of 3 per row -->
+                    <div class="card">
+                        {% if product.photo %}
+                        <img src="{{ product.photo.url }}" class="card-img-top" alt="..." style="max-width: 150px; height: auto;">
+
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">Name:{{ product.name }}</h5>
+                            <p class="card-text">Price:{{ product.price }}</p>
+                            <p class="card-text">About:{{ product.description }}</p>
+                            <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    </div><div class="row"> <!-- Close the current row and start a new one -->
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        <p>This vendor has no products listed.</p>
+        {% endif %}
+        <a href="{% url 'vendor_list' %}">Back to Vendor List</a>
+    </div>
+</div>
+
+{% endblock main_content %}

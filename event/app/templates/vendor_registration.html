@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vendor Registration{% endblock title %}
+
+{% block main_content %}
+
+<div class="card">
+    <div class="card-header">
+        Vendor Registration
+    </div>
+    <div class="card-body">
+
+        <div class="registration-container">
+            <h2>Vendor Registration</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <ul class="bullets" style="list-style-type: none; padding-left: 0; margin: 0;">
+                   <li> {{ field.label_tag }} </li>
+                   <li> {{ field }}</li>
+                  </ul>
+                </div>
+            {% endfor %}
+            <br>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        
+            {% if messages %}
+                <div class="message-container">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <br>
+        <a href="{%url 'vendor_login' %}" class="card-link">Already Have Account</a>
+    
+    </div>
+  </div>
+  {% endblock main_content %}

@@ -1,0 +1,49 @@
+{% extends "user_home.html" %}
+{% load static %}
+{% block title %}Cart{% endblock title %} 
+
+{% block main_content %}
+<div class="container">
+  <div class="row">
+    <!-- Column for the list of products -->
+    <div class="col-md-8">
+      <h5 class="card-title">Shopping Cart</h5>
+      {% for item in cart_items %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <!-- Product Image -->
+            <div class="col-4">
+              <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}" class="img-fluid" style="max-height: 150px;">
+            </div>
+            <!-- Product Details -->
+            <div class="col-8">
+              <h6 class="card-text">{{ item.product.name }}</h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Quantity: {{ item.quantity }}</li>
+                <li class="list-group-item">Price: ${{ item.product.price }}</li>
+              </ul>
+              <a href="{% url 'remove_from_cart' item.id %}" class="card-link">Remove</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Column for the total price -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cart Summary</h5>
+          <p>Total Price: ${{ total_price }}</p>
+          <!-- Place Order Button -->
+          <a href="{% url 'place_order' %}" class="btn btn-primary">Place Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main_content %}
+
+       

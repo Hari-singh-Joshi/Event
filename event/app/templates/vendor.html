@@ -1,0 +1,17 @@
+{% extends "user_home.html" %}
+{% load static %}
+{% block title %}Vendor List{% endblock title %} 
+
+{% block main_content %}
+{% for vendor in vendors %}
+<div class="card">
+    <div class="card-body">
+        <a href="{% url 'vendor_products' vendor_name=vendor.username %}"class="btn btn-success btn-lg shadow-sm ">
+            {{ vendor.username }}
+            
+        </a>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock main_content %}

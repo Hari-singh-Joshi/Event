@@ -1,0 +1,56 @@
+{% extends "admin_home.html" %}
+{% load static %}
+{% block title %}User Maintainance{% endblock title %} 
+
+{% block main_content %}
+
+
+<div class="card">
+    <div class="card-header">
+        User Maintainance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> User Maintainance</h5>
+       <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                
+            </tr>
+        </thead>
+        <tbody >
+            {% for vendor in vendors %}
+                <tr >
+                    <td>{{ vendor.username }}</td>
+                    <td>{{ vendor.email }}</td>
+                    <td><a href="{% url 'update_vendor' vendor.id %}" class="btn btn-danger">Update</a></td>
+                    <td><a href="{% url 'delete_vendor' vendor.id %}" class="btn btn-warning">Delete</a></td>
+                    
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No vendors found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+      
+      <br>
+    
+      {% if messages %}
+      <div class="message-container">
+          {% for message in messages %}
+              <div class="alert {{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+     
+    </div>
+  </div>
+  
+{% endblock main_content %}

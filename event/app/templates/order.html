@@ -1,0 +1,28 @@
+<!-- order.html -->
+{% extends "user_home.html" %}
+{% load static %}
+{% block title %}Order Status{% endblock title %}
+
+{% block main_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="card-title">Order Status</h3>
+      <p>Order ID: {{ order.id }}</p>
+      <p>Status: {{ order.status }}</p>
+      <p>Order Date: {{ order.created_at }}</p>
+      
+      <h5>Order Items:</h5>
+      <ul class="list-group">
+        {% for item in order.items.all %}
+          <li class="list-group-item">
+            <strong>{{ item.product.name }}</strong> - Quantity: {{ item.quantity }} - Price: ${{ item.price }}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <p><strong>Total Price: ${{ total_order_price }}</strong></p>
+    </div>
+  </div>
+</div>
+{% endblock main_content %}
